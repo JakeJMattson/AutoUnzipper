@@ -1,6 +1,5 @@
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import net.lingala.zip4j.core.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
+import org.rauschig.jarchivelib.*;
 
 import java.io.*;
 import java.nio.file.*;
@@ -42,21 +41,21 @@ class AutoUnzipper
 					break;
 			}
 		}
-		catch (IOException | ZipException | InterruptedException e)
+		catch (IOException | InterruptedException e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	private static void unzip(File zip) throws ZipException
+	private static void unzip(File src) throws IOException
 	{
-		String path = zip.getAbsolutePath();
-		String destination = path.substring(0, path.lastIndexOf('.'));
+		String path = src.getAbsolutePath();
+		File dst = new File(path.substring(0, path.lastIndexOf('.')));
 
-		ZipFile zipFile = new ZipFile(zip);
-		zipFile.extractAll(destination);
+		Archiver archiver = ArchiverFactory.createArchiver(ArchiveFormat.ZIP);
+		archiver.extract(src, dst);
 
 		if (SHOULD_DELETE_ORIGINAL)
-			zip.delete();
+			src.delete();
 	}
 }
