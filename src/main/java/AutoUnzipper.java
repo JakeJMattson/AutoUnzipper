@@ -7,6 +7,8 @@ import java.nio.file.*;
 
 class AutoUnzipper
 {
+	private static final boolean SHOULD_DELETE_ORIGINAL = true;
+
 	public static void main(String[] args)
 	{
 		String downloads = System.getProperty("user.home") + "/Downloads/";
@@ -53,5 +55,8 @@ class AutoUnzipper
 
 		ZipFile zipFile = new ZipFile(zip);
 		zipFile.extractAll(destination);
+
+		if (SHOULD_DELETE_ORIGINAL)
+			zip.delete();
 	}
 }
