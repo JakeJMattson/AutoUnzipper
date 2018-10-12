@@ -1,3 +1,5 @@
+package io.github.jakejmattson.autounzipper;
+
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import org.rauschig.jarchivelib.*;
 
@@ -63,6 +65,9 @@ class AutoUnzipper
 				break;
 			case "tar.gz":
 				archiver = ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP);
+				break;
+			case "7z":
+				archiver = ArchiverFactory.createArchiver(ArchiveFormat.SEVEN_Z);
 				break;
 			default:
 				return;
