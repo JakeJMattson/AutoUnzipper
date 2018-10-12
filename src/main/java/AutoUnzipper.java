@@ -31,10 +31,9 @@ class AutoUnzipper
 					if (watchEvent.kind() == ENTRY_CREATE)
 					{
 						Path newPath = ((WatchEvent<Path>) watchEvent).context();
-						File zip = new File(dir, newPath.toString());
+						File newFile = new File(dir, newPath.toString());
 
-						if (newPath.toString().endsWith("zip"))
-							unzip(zip);
+						unArchive(newFile);
 					}
 
 				if (!key.reset())
@@ -47,12 +46,29 @@ class AutoUnzipper
 		}
 	}
 
-	private static void unzip(File src) throws IOException
+	private static void unArchive(File src) throws IOException
 	{
-		String path = src.getAbsolutePath();
-		File dst = new File(path.substring(0, path.lastIndexOf('.')));
+		String[] split = src.getName().split("\\.", 2);
 
-		Archiver archiver = ArchiverFactory.createArchiver(ArchiveFormat.ZIP);
+		if (split.length < 2)
+			return;
+
+		String extension = split[1];
+		Archiver archiver;
+
+		switch (extension)
+		{
+			case "zip":
+				archiver = ArchiverFactory.createArchiver(ArchiveFormat.ZIP);
+				break;
+			case "tar.gz":
+				archiver = ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP);
+				break;
+			default:
+				return;
+		}
+
+		File dst = new File(src.getParentFile(), split[0]);
 		archiver.extract(src, dst);
 
 		if (SHOULD_DELETE_ORIGINAL)
