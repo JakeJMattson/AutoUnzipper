@@ -3,7 +3,7 @@
     <img src="https://img.shields.io/badge/Java-8-blue.svg" alt="Java 8">
   </a>
   <a href="https://github.com/thrau/jarchivelib">
-    <img src="https://img.shields.io/badge/jarchivelib-0.8.0-blue.svg" alt="jarchivelib-0.8.0">
+    <img src="https://img.shields.io/badge/jarchivelib-1.0.0-blue.svg" alt="jarchivelib-1.0.0">
   </a>
   <a href="LICENSE.md">
     <img src="https://img.shields.io/github/license/JakeJMattson/FoobarFinder.svg" alt="license">
