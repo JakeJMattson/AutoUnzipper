@@ -11,5 +11,13 @@
 </p>
 Listen to a directory (i.e. Downloads folder) for new files ending in "zip" and unzip them.
 
+## Getting Started
+### Installing Java
+<p align="justify">
+Visit the <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java Downloads</a> 
+page and select the version of your choice.
+Run the installer and follow the instructions provided.
+</p>
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
