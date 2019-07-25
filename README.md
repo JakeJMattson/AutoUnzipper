@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/badge/jarchivelib-1.0.0-blue.svg" alt="jarchivelib-1.0.0">
   </a>
   <a href="LICENSE.md">
-    <img src="https://img.shields.io/github/license/JakeJMattson/FoobarFinder.svg" alt="license">
+    <img src="https://img.shields.io/github/license/JakeJMattson/AutoUnzipper.svg" alt="license">
   </a>
 </p>
 
