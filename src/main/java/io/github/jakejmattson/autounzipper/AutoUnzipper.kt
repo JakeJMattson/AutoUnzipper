@@ -6,12 +6,18 @@ import java.nio.file.*
 
 private const val SHOULD_DELETE_ORIGINAL = true
 
-fun main() {
-    val downloads = System.getProperty("user.home") + "/Downloads/"
-    watchDirectoryPath(File(downloads))
+fun main(args: Array<String>) {
+    require(args.isNotEmpty()) { "Expected an input path as a command line argument." }
+
+    val inputFile = File(args.first())
+
+    require(inputFile.exists()) { "Input path does not exist." }
+    require(inputFile.isDirectory) { "Input path must be a directory." }
+
+    watchDirectory(inputFile)
 }
 
-private fun watchDirectoryPath(dir: File) {
+private fun watchDirectory(dir: File) {
     val path = dir.toPath()
     val service = path.fileSystem.newWatchService()
 
