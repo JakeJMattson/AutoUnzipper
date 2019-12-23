@@ -13,40 +13,34 @@ fun main() {
 
 private fun watchDirectoryPath(dir: File) {
     val path = dir.toPath()
+    val service = path.fileSystem.newWatchService()
 
-    path.fileSystem.newWatchService().use { service ->
-        //Watch for creation events
-        path.register(service, StandardWatchEventKinds.ENTRY_CREATE)
+    path.register(service, StandardWatchEventKinds.ENTRY_CREATE)
 
-        while (true) {
-            val key = service.take()
+    while (true) {
+        val key = service.take()
 
-            for (watchEvent in key.pollEvents()) if (watchEvent.kind() === StandardWatchEventKinds.ENTRY_CREATE) {
-                val newPath = (watchEvent as WatchEvent<*>).context()
-                val newFile = File(dir, newPath.toString())
-                unArchive(newFile)
+        key.pollEvents()
+            .filter { it.kind() === StandardWatchEventKinds.ENTRY_CREATE }
+            .map { File( dir, it.context().toString()) }
+            .forEach {
+                unArchive(it)
             }
 
-            if (!key.reset())
-                break
-        }
+        if (!key.reset())
+            break
     }
 }
 
-@Throws(IOException::class)
 private fun unArchive(src: File) {
-    val split = src.name.split("\\.".toRegex(), 2)
-
-    if (split.size < 2) return
-
-    val archiver = when (split[1]) {
+    val archiver = when (src.extension) {
         "zip" -> ArchiverFactory.createArchiver(ArchiveFormat.ZIP)
         "tar.gz" -> ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP)
         "7z" -> ArchiverFactory.createArchiver(ArchiveFormat.SEVEN_Z)
         else -> return
     }
 
-    val dst = File(src.parentFile, split[0])
+    val dst = File(src.parentFile, src.nameWithoutExtension)
     archiver.extract(src, dst)
 
     if (SHOULD_DELETE_ORIGINAL)
