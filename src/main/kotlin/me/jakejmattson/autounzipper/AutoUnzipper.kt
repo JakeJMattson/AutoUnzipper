@@ -1,4 +1,4 @@
-package io.github.jakejmattson.autounzipper
+package me.jakejmattson.autounzipper
 
 import org.rauschig.jarchivelib.*
 import java.io.*
