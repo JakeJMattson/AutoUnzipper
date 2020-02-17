@@ -10,7 +10,7 @@
   </a>
 </p>
 
-Listen to a directory (i.e. Downloads folder) for new files ending in "zip" and unzip them.
+This application listens to a directory (i.e. Downloads folder) for new archive files, such as `zip` or `tar.gz` and extracts the files from it automatically.
 
 ## Prerequisites
 
