@@ -39,11 +39,10 @@ private fun watchDirectory(dir: File) {
 }
 
 private fun unArchive(src: File) {
-    val archiver = when (src.extension) {
-        "zip" -> ArchiverFactory.createArchiver(ArchiveFormat.ZIP)
-        "tar.gz" -> ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP)
-        "7z" -> ArchiverFactory.createArchiver(ArchiveFormat.SEVEN_Z)
-        else -> return
+    val archiver = try {
+        ArchiverFactory.createArchiver(src)
+    } catch (e: Exception) {
+        return
     }
 
     val dst = File(src.parentFile, src.nameWithoutExtension)
