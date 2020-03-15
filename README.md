@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://kotlinlang.org/">
-    <img src="https://img.shields.io/badge/Kotlin-1.3.61-blue.svg" alt="Kotlin 1.3.61">
+    <img src="https://img.shields.io/badge/Kotlin-1.3.70-blue.svg" alt="Kotlin 1.3.70">
   </a>
   <a href="https://github.com/thrau/jarchivelib">
     <img src="https://img.shields.io/badge/jarchivelib-1.0.0-blue.svg" alt="jarchivelib-1.0.0">
